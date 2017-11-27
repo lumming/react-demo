@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>React！todolist delete</title>
+		<link rel="stylesheet" href="css/react.css" />
+		<script src="js/react.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/react-dom.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/browser.min.js" type="text/javascript" charset="utf-8"></script>	
+		<script src="js/ReactRouter.min.js"></script>		
+	</head>
+	<body>
+		<div id="container">
+		</div>
+		<script type="text/babel">
+			var Todlelist = React.createClass({
+				getInitialState:function(){
+					return{
+						items:[]
+					}					
+				},
+				addItem:function(e){
+					var itemArray = this.state.items;
+					itemArray.push({
+						text: this._inputElement.value,
+						key: Date.now()
+					});
+					this.setState({
+						items:itemArray
+					})
+					this._inputElement.value = "";
+					e.preventDefault();
+				},
+				delAll:function(e){
+					this.setState({
+						items:[]
+					})
+				},
+				render:function(){
+					return(
+						<div className="todelListMain">
+							<form onSubmit={this.addItem}>	
+								<input ref={(a) => this._inputElement = a} type="text" id="" placeholder="Enter your name"/>
+								<input type="submit" value="添加"/>
+							</form>
+							<TodleItems entems={this.state.items}></TodleItems>
+							<input type="button" value="清空" onClick={this.delAll}/>
+						</div>
+					)
+				}
+			})
+			
+			/*var DelBtn = React.createClass({				
+				delItem:function(e){
+					console.log(this.props.index)
+				},
+				render:function(){
+					return(
+						<input type="button" value="清空" onClick={this.delItem}/>
+					)
+				}
+			})*/
+			
+			var TodleItems = React.createClass({
+				render:function(){
+					var delEntems = this.props.entems;
+					function createTasks(item) {
+						return <li key={item.key}>{item.text}</li>
+					}
+					var listItems = delEntems.map(createTasks);
+					return(
+						<ul className="thiUllist">
+							{listItems}
+						</ul>
+					)
+				}
+			})
+			ReactDOM.render(
+				<div>
+					<Todlelist></Todlelist>
+				</div>,
+				document.querySelector("#container")
+			)
+		</script>
+	</body>
+</html>

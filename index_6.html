@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>React！从数据来到ＵＩ</title>
+		<script src="js/react.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/react-dom.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/browser.min.js" type="text/javascript" charset="utf-8"></script>	
+		<style type="text/css">
+			#container{
+				padding: 50px;
+				background-color: #fff;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="container"></div>
+		<script type="text/javascript">
+//			var theCirce = <Circe bgcolor="#F9C240"></Circe>;
+//			function showCircle(){
+//				var colors = ["#393E41", "#E94F37", "#1C89BF", "#A1D363"];
+//				var ran = Math.floor(Math.random() * colors.length);
+//				console.log(ran);
+//				return <Circe bgcolor={colors[ran]} />;				
+//			}
+		</script>
+		<script type="text/babel">				
+			var Circe = React.createClass({
+				render:function(){
+					var circeStyle = {
+						padding: 10,
+						margin: 20,
+						display: "inline-block",
+						backgroundColor: this.props.bgcolor,
+						borderRadius: "50%",
+						width: 100,
+						height: 100,
+					};
+					return(
+						<div style={circeStyle}>
+							
+						</div>
+					);
+				}				
+			});			
+			
+			var colors = ["#393E41", "#E94F37", "#1C89BF", "#A1D363","#85FFC7", "#297373", "#FF8552", "#A40E4C"];
+			var renderData = [];
+			for (var i = 0; i < colors.length; i++) {
+				var color = colors[i];
+				renderData.push(<Circe key={i + color} bgcolor={colors[i]}/>);
+			}
+			ReactDOM.render(
+				<div>
+					{renderData}
+				</div>,
+				document.querySelector("#container")
+			)
+			
+			
+		</script>
+	</body>
+</html>

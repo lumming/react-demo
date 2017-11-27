@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>React！神奇的组件.</title>
+		<script src="js/react.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/react-dom.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/browser.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="container"></div>
+		<div id="buttoner"></div>
+		<script type="text/babel">
+			var NameEle = React.createClass({
+				render:function(){
+					return(
+						<h1>{this.props.name}，你好！</h1>
+					)
+				}
+			});			
+			ReactDOM.render(
+				<div>
+					<NameEle name="老王"/>
+					<NameEle name="小明"/>
+					<NameEle name="小宋"/>
+					<NameEle name="宝宝"/>			
+				</div>,				
+				document.querySelector("#container")
+			)
+			
+			var Buttonify = React.createClass({
+				render:function(){
+					return(
+						<div>
+							<button type={this.props.behavior}>{this.props.children[1]}</button>
+						</div>
+					)
+				}
+			})
+			ReactDOM.render(
+				<Buttonify  behavior="submit"><span>SEND DATA</span><span>提交</span></Buttonify>,
+				document.querySelector("#buttoner")
+			)
+		</script>
+		<!--<script type="text/babel">
+//			 组件多用并使用this.props读取属性
+			var HelloWorld = React.createClass({
+				render:function(){
+					return(
+					<p>Hello,{this.props.tar},{this.props.age}!</p>
+					) 
+				}
+			});
+			ReactDOM.render(
+				<div>
+					<HelloWorld tar="XiaoMing" age="20"/>
+					<HelloWorld tar="XiaoHong" age="21"/>
+					<HelloWorld tar="LaoWang" age="22"/>					
+				</div>,
+				document.querySelector("#container")
+			);
+		</script>-->
+	</body>
+</html>

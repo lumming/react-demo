@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>React！每秒增加100的雷击.</title>
+		<script src="js/react.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/react-dom.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/browser.min.js" type="text/javascript" charset="utf-8"></script>
+		<style>
+							
+		</style>					
+	</head>
+	<body>
+		<div id="container"></div>
+		<script type="text/javascript">
+
+		</script>
+		<script type="text/babel">				
+			var LightningCounter =  React.createClass({				
+				getInitialState:function(){
+					var EndTime = new Date("2016/12/12 18:29:59");
+					var EndHours = EndTime.getHours();
+					var EndMinutes = EndTime.getMinutes();
+					var EndSeconds = EndTime.getSeconds();
+					return({
+						hours:new Date().getHours(),
+						min:new Date().getMinutes(),
+						sec:new Date().getSeconds(),
+						EndHours:EndHours-new Date().getHours(),
+						EndMinutes:EndMinutes-new Date().getMinutes(),
+						EndSeconds:EndSeconds-new Date().getSeconds(),
+					});
+				},
+				timerTick:function(){
+					var EndTime = new Date("2016/12/12 18:29:59");
+					var EndHours = EndTime.getHours();
+					var EndMinutes = EndTime.getMinutes();
+					var EndSeconds = EndTime.getSeconds();
+					this.setState({
+						hours:new Date().getHours(),
+						min:new Date().getMinutes(),
+						sec:new Date().getSeconds(),
+						EndHours:EndHours-new Date().getHours(),
+						EndMinutes:EndMinutes-new Date().getMinutes(),
+						EndSeconds:EndSeconds-new Date().getSeconds(),
+					})	
+				},
+				componentDidMount:function(){					
+					setInterval(this.timerTick, 1000);	
+				},
+				render: function() {
+					return (
+						<h1>
+							<Tips><span>当前时间为：</span><span>距离下班仅有：</span></Tips>
+							<p><span>{this.state.hours}</span> : <span>{this.state.min}</span> : <span>{this.state.sec}</span></p>
+							<Tips><span>距离下班仅有：</span><span>当前时间为：</span></Tips>
+							<p><span>{this.state.EndHours}</span> : <span>{this.state.EndMinutes}</span> : <span>{this.state.EndSeconds}</span></p>
+						</h1>						
+					);
+				}
+			}); 			
+			var Lightningcounterdisplay = React.createClass({
+				render: function() {
+				var divStyle = {
+					width: 250,
+					textAlign: "center",
+					backgroundColor: "black",
+					padding: 40,
+					fontFamily: "微软雅黑",
+					color: "#FFF",
+					borderRadius: 10
+				};
+				return(
+					<div style={divStyle}>			
+						<LightningCounter/>
+					</div>
+				);
+				}
+			});
+			var Tips = React.createClass({
+				render:function(){
+					var tipStyle = {
+						color:"#faa"
+					}
+					return(
+						<p style={tipStyle}>{this.props.children[0]}</p>
+					)
+				}
+			})
+			ReactDOM.render(
+			<div>
+				<Lightningcounterdisplay></Lightningcounterdisplay>
+			</div>,	
+				document.querySelector("#container")
+			);
+		</script>
+	</body>
+</html>
